@@ -2,7 +2,7 @@ FROM alpine:latest
 LABEL maintainer="dev@jpillora.com"
 # webproc release settings
 ENV WEBPROC_VERSION 0.4.0
-ENV WEBPROC_URL https://github.com/jpillora/webproc/releases/download/$WEBPROC_VERSION/webproc_linux_amd64.gz
+ENV WEBPROC_URL https://github.com/jpillora/webproc/releases/download/v${WEBPROC_VERSION}/webproc_${WEBPROC_VERSION}_linux_amd64.gz
 ENV CADDY_VERSION 2.10.2
 ENV CADDY_URL https://github.com/caddyserver/caddy/releases/download/v${CADDY_VERSION}/caddy_${CADDY_VERSION}_linux_amd64.tar.gz
 # fetch caddy and webproc binary (rely on ca root certs signing github.com for security)
