@@ -1,7 +1,7 @@
 FROM alpine:latest
 LABEL maintainer="dev@jpillora.com"
 # webproc release settings
-ENV WEBPROC_VERSION 0.4.0
+ENV WEBPROC_VERSION 0.2.2
 ENV WEBPROC_URL https://github.com/jpillora/webproc/releases/download/$WEBPROC_VERSION/webproc_linux_amd64.gz
 ENV CADDY_VERSION 2.10.2
 ENV CADDY_URL https://github.com/mholt/caddy/releases/download/v${CADDY_VERSION}/caddy_v${CADDY_VERSION}_linux_amd64.tar.gz
