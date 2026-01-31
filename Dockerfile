@@ -20,4 +20,4 @@ RUN apk update \
 COPY Caddyfile /etc/Caddyfile
 #run!
 ENTRYPOINT ["webproc","-c","/etc/Caddyfile","--","caddy"]
-CMD ["-agree", "-conf", "/etc/Caddyfile"]
+CMD ["run", "-conf", "/etc/Caddyfile"]
