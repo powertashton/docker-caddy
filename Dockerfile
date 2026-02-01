@@ -3,23 +3,17 @@ LABEL maintainer="dev@jpillora.com"
 # webproc release settings
 ENV WEBPROC_VERSION 0.4.0
 ENV WEBPROC_URL https://github.com/jpillora/webproc/releases/download/v${WEBPROC_VERSION}/webproc_${WEBPROC_VERSION}_linux_amd64.gz
-ENV CADDY_VERSION 2.10.2
-ENV CADDY_URL https://github.com/caddyserver/caddy/releases/download/v${CADDY_VERSION}/caddy_${CADDY_VERSION}_linux_amd64.tar.gz
-# fetch caddy and webproc binary (rely on ca root certs signing github.com for security)
+# fetch webproc binary (rely on ca root certs signing github.com for security)
 RUN set -e && set -x
 RUN apk update \
-	&& apk add ca-certificates \
+	&& apk add --no-cache ca-certificates \
 	&& apk add --no-cache --virtual .build-deps curl \
 	&& curl -sL $WEBPROC_URL | gzip -d - > /usr/local/bin/webproc \
 	&& chmod +x /usr/local/bin/webproc \
-	&& curl -sL $CADDY_URL | gzip -d - | tar -xv -C /tmp -f - \
-	&& mv /tmp/caddy /usr/local/bin/caddy \
 	&& apk del .build-deps \
 	&& rm -rf /tmp/* /var/cache/apk/*
-#configure caddy
-RUN apk add --no-cache \
-	ca-certificates \
-	curl \
+
+RUN apk add --no-cache
 	libcap \
 	mailcap
 
@@ -67,7 +61,7 @@ LABEL org.opencontainers.image.url=https://caddyserver.com
 LABEL org.opencontainers.image.documentation=https://caddyserver.com/docs
 LABEL org.opencontainers.image.vendor="Light Code Labs"
 LABEL org.opencontainers.image.licenses=Apache-2.0
-LABEL org.opencontainers.image.source="https://github.com/caddyserver/caddy-docker"
+LABEL org.opencontainers.image.source="https://github.com/powertashton/docker-caddy"
 
 EXPOSE 80
 EXPOSE 443
@@ -75,8 +69,6 @@ EXPOSE 443/udp
 EXPOSE 2019
 
 WORKDIR /srv
-
-
 
 COPY Caddyfile /etc/Caddyfile
 #run!
