@@ -13,7 +13,7 @@ RUN apk update \
 	&& apk del .build-deps \
 	&& rm -rf /tmp/* /var/cache/apk/*
 
-RUN apk add --no-cache
+RUN apk add --no-cache \
 	libcap \
 	mailcap
 
